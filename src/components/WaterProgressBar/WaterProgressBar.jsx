@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import css from './WaterProgressBar.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { selectAllWaterByDay } from '../../redux/water/selectors';
 import { selectUser } from '../../redux/auth/selectors';
 import { useDateFC } from '../../helpers/utils.js';
@@ -15,7 +15,7 @@ const WaterProgressBar = () => {
   const containerRef = useRef(null);
   const [ellipsePosition, setEllipsePosition] = useState(0);
 
-  const updateEllipsePosition = () => {
+  const updateEllipsePosition = useCallback(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.offsetWidth;
       let adjustedProgress = Math.min(100, Math.max(0, roundedProgress));
@@ -29,10 +29,6 @@ const WaterProgressBar = () => {
 
       setEllipsePosition(newPosition);
     }
-  };
-
-  useEffect(() => {
-    updateEllipsePosition();
   }, [roundedProgress]);
 
   useEffect(() => {
@@ -41,7 +37,7 @@ const WaterProgressBar = () => {
     return () => {
       window.removeEventListener('resize', updateEllipsePosition);
     };
-  }, [roundedProgress]);
+  }, [updateEllipsePosition]);
 
   const shouldShowPercentage =
     (roundedProgress >= 12 && roundedProgress <= 38) ||

@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import icons from '../../assets/icons/icons.svg';
 import { useDispatch } from 'react-redux';
-import { getAuthUrl, login } from '../../redux/auth/operations.js';
+import { login } from '../../redux/auth/operations.js';
 import { toast, Toaster } from 'react-hot-toast';
 import clsx from 'clsx';
 
@@ -42,18 +42,6 @@ const SignInForm = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  const handleGoogleOAuth = async () => {
-    try {
-      const resultAction = await dispatch(getAuthUrl());
-      if (getAuthUrl.fulfilled.match(resultAction)) {
-        const url = resultAction.payload;
-        window.location.replace(url);
-      }
-    } catch (err) {
-      toast.error(`Error handling Google OAuth: ${err}`);
-    }
   };
 
   const handleChange = field => {
