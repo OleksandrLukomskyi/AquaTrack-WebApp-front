@@ -86,21 +86,20 @@ export const verifyGoogleOAuth = createAsyncThunk(
   }
 );
 
-// Функция закомментирована, так как логика перенесена в axiosInstance.js
-// export const refreshSettingInterceptors = () => {
-//   instance.interceptors.response.use(
-//     response => response,
-//     async error => {
-//       if (error.response.status === 401) {
-//         try {
-//           refreshUser();
-//         } catch (error) {
-//           return Promise.reject(error);
-//         }
-//       }
-//     }
-//   );
-// };
+export const refreshSettingInterceptors = store => {
+  //   instance.interceptors.response.use(
+  //     response => response,
+  //     async error => {
+  //       if (error.response.status === 401) {
+  //         try {
+  //           refreshUser();
+  //         } catch (error) {
+  //           return Promise.reject(error);
+  //         }
+  //       }
+  //     }
+  //   );
+};
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh-tokens',

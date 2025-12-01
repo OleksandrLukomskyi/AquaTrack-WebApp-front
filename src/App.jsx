@@ -17,7 +17,7 @@ import './App.css';
 
 function App() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader loading />}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="/confirm-google-auth" element={<GoogleAuthCallback />} />
